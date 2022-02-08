@@ -1,9 +1,10 @@
+//bolinha
 let xBolinha = 300;
 let yBolinha = 200;
 let diametroBolinha = 20;
 
-let velocidadeXBolinha = 10;
-let velocidadeYBolinha = 10;
+let velocidadeXBolinha = 0.5;
+let velocidadeYBolinha = 0.5;
 
 //pontuação
 let meuPonto = 0;
@@ -15,20 +16,28 @@ function setup() {
 
 function draw() {
   background(0);  
-  circle(xBolinha,yBolinha,diametroBolinha);
-  
-  bordas();
+  mostraBolinha();
+  movimentaBolinha();
+  rect();
 }
 
-function bordas(){
+function mostraBolinha(){
+    circle(xBolinha,yBolinha,diametroBolinha);
+}
+
+function movimentaBolinha(){
   xBolinha += velocidadeXBolinha;
-  if(xBolinha >= 600 || xBolinha <= 0){
-    velocidadeXBolinha *= -1;
-  }
-  yBolinha += velocidadeYBolinha;
-  if(yBolinha >= 400 || yBolinha <= 0){
-    velocidadeYBolinha *= -1;
-  }//pontuacao();
+  verificaColisaoBorda();
+}
+
+function verificaColisaoBorda(){
+    if(xBolinha >= 590 || xBolinha <= 10){
+        velocidadeXBolinha *= -1;
+      }
+      yBolinha += velocidadeYBolinha;
+      if(yBolinha >= 390 || yBolinha <= 10){
+        velocidadeYBolinha *= -1;
+      }
 }
 
 function pontuacao(){
