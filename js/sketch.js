@@ -22,6 +22,8 @@ let xRaqueteOponente = 585;
 let yRaqueteOponente = 150;
 let velocidadeYOponente;
 
+let colidiu = false;
+
 function setup() {
   createCanvas(600, 400);
 }
@@ -29,8 +31,6 @@ function setup() {
 function draw() {
   background(0);  
   bolinha();
-  mostraRaquetes(xMinhaRaquete, yMinhaRaquete);
-  mostraRaquetes(xRaqueteOponente, yRaqueteOponente);
   minhaRaquete();
   raqueteOponente();
   pontuacao();
@@ -42,30 +42,24 @@ function bolinha(){
 }
 
 function minhaRaquete(){
+  mostraRaquetes(xMinhaRaquete, yMinhaRaquete);
   movimentaMinhaRaquete();
-  verficacaoColisaoRaquete();
+  verificaColisaoRaquetesLib(xMinhaRaquete, yMinhaRaquete);
 }
 
 function raqueteOponente(){
+  mostraRaquetes(xRaqueteOponente, yRaqueteOponente);
   movimentaRaqueteOponente();
-  verficacaoColisaoOponente();
+  verificaColisaoRaquetesLib(xRaqueteOponente, yRaqueteOponente);
+}
+
+function mostraRaquetes(x, y){
+  rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
 function movimentaRaqueteOponente(){
   velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
   yRaqueteOponente += velocidadeYOponente;
-}
-
-function verficacaoColisaoOponente(){
-  if((xBolinha + raio) > (xRaqueteOponente) 
-    && (yBolinha - raio) < (yRaqueteOponente + raqueteAltura)
-    && (yBolinha + raio) > (yRaqueteOponente)){
-      velocidadeXBolinha *= -1;
-  }
-}
-
-function mostraRaquetes(x, y){
-  rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
 function movimentaMinhaRaquete(){
@@ -77,12 +71,11 @@ function movimentaMinhaRaquete(){
     }
 }
 
-function verficacaoColisaoRaquete(){
-    if((xBolinha - raio) < (xMinhaRaquete + raqueteComprimento) 
-    && (yBolinha - raio) < (yMinhaRaquete + raqueteAltura)
-    && (yBolinha + raio) > (yMinhaRaquete)){
-        velocidadeXBolinha *= -1;
-    }
+function verificaColisaoRaquetesLib(x, y){
+  colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
+  if(colidiu){
+    velocidadeXBolinha *= -1;
+  }
 }
 
 function mostraBolinha(){
