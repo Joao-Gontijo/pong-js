@@ -115,6 +115,10 @@ function verificaColisaoBorda(){
 }
 
 function pontuacao(){
+  fill(255);
+  text(meuPonto, 278, 26);
+  text(pontoOponente, 312, 26)
+  
   if(xBolinha <= 10){
     pontoOponente += 1;
     yBolinha = 200;
