@@ -4,7 +4,7 @@ let yBolinha = 200;
 let diametroBolinha = 20;
 
 let velocidadeXBolinha = 6;
-let velocidadeYBolinha = 6;
+let velocidadeYBolinha = 0;
 let raio = diametroBolinha / 2;
 //pontuação
 let meuPonto = 0;
@@ -49,7 +49,7 @@ function minhaRaquete(){
 
 function raqueteOponente(){
   mostraRaquetes(xRaqueteOponente, yRaqueteOponente);
-  movimentaRaqueteOponente();
+  //movimentaRaqueteOponente();
   verificaColisaoRaquetesLib(xRaqueteOponente, yRaqueteOponente);
 }
 
@@ -128,5 +128,40 @@ function pontuacao(){
     meuPonto += 1;
     yBolinha = 200;
     xBolinha = 300;
+  }
+  fimDoJogo();
+}
+
+function fimDoJogo(){
+  if(pontoOponente == 12){
+    fill(255);
+    text("GAME OVER", 260, 230);
+    text("OPONENTE VENCEU", 240, 245);
+    velocidadeXBolinha = 0;
+    velocidadeYBolinha = 0;
+    comecarDeNovo();
+  }
+  if(meuPonto == 12){
+    fill(255);
+    text("GAME OVER", 260, 230);
+    text("VOCÊ VENCEU", 255, 245);
+    velocidadeXBolinha = 0;
+    velocidadeYBolinha = 0;
+    comecarDeNovo();
+  }
+ 
+}
+
+
+function comecarDeNovo(){
+  fill(255);
+  text("COMEÇAR DE NOVO?", 235, 300);
+  if(keyIsDown(ENTER)){
+    meuPonto = 0;
+    pontoOponente = 0;
+    velocidadeXBolinha = 6;
+    velocidadeYBolinha = 6;
+    yMinhaRaquete = 150;
+    yRaqueteOponente = 150;
   }
 }
