@@ -1,14 +1,14 @@
 //bolinha
 let xBolinha = 300;
 let yBolinha = 200;
-let diametroBolinha = 20;
+let diametroBolinha = 18;
 
-let velocidadeXBolinha = 6;
+let velocidadeXBolinha = 0;
 let velocidadeYBolinha = 0;
 let raio = diametroBolinha / 2;
 //pontuação
-let meuPonto = 0;
-let pontoOponente = 0;
+let meuPonto = 11;
+let pontoOponente = 12;
 
 
 //raquetes
@@ -115,9 +115,14 @@ function verificaColisaoBorda(){
 }
 
 function pontuacao(){
+  stroke(255);
+  textSize(16);
+  fill(color(255, 140, 0));
+  rect(139, 10, 40, 20);
+  rect(439, 10, 40, 20);
   fill(255);
-  text(meuPonto, 278, 26);
-  text(pontoOponente, 312, 26)
+  text(meuPonto, 150, 26);
+  text(pontoOponente, 450, 26)
   
   if(xBolinha <= 10){
     pontoOponente += 1;
@@ -134,17 +139,15 @@ function pontuacao(){
 
 function fimDoJogo(){
   if(pontoOponente == 12){
-    fill(255);
-    text("GAME OVER", 260, 230);
-    text("OPONENTE VENCEU", 240, 245);
+    text("GAME OVER", 250, 230);
+    text("OPONENTE VENCEU", 220, 245);
     velocidadeXBolinha = 0;
     velocidadeYBolinha = 0;
     comecarDeNovo();
   }
   if(meuPonto == 12){
-    fill(255);
-    text("GAME OVER", 260, 230);
-    text("VOCÊ VENCEU", 255, 245);
+    text("GAME OVER", 250, 230);
+    text("VOCÊ VENCEU", 240, 245);
     velocidadeXBolinha = 0;
     velocidadeYBolinha = 0;
     comecarDeNovo();
@@ -154,8 +157,7 @@ function fimDoJogo(){
 
 
 function comecarDeNovo(){
-  fill(255);
-  text("COMEÇAR DE NOVO?", 235, 300);
+  text("COMEÇAR DE NOVO?", 217, 300);
   if(keyIsDown(ENTER)){
     meuPonto = 0;
     pontoOponente = 0;
