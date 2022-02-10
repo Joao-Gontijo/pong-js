@@ -10,7 +10,6 @@ let raio = diametroBolinha / 2;
 let meuPonto = 11;
 let pontoOponente = 12;
 
-
 //raquetes
 let raqueteComprimento = 10;
 let raqueteAltura = 90;
@@ -24,8 +23,20 @@ let velocidadeYOponente;
 
 let colidiu = false;
 
+//sons do jogo
+let raquetada;
+let ponto;
+let trilha;
+
+function preload(){
+  trilha = loadSound("./assets/sounds/trilha.mp3");
+  ponto = loadSound("./assets/sounds/ponto.mp3");
+  raquetada = loadSound("./assets/sounds/raquetada.mp3");
+}
+
 function setup() {
   createCanvas(600, 400);
+  trilha.loop();
 }
 
 function draw() {
@@ -49,7 +60,7 @@ function minhaRaquete(){
 
 function raqueteOponente(){
   mostraRaquetes(xRaqueteOponente, yRaqueteOponente);
-  //movimentaRaqueteOponente();
+  movimentaRaqueteOponente();
   verificaColisaoRaquetesLib(xRaqueteOponente, yRaqueteOponente);
 }
 
@@ -57,16 +68,27 @@ function mostraRaquetes(x, y){
   rect(x, y, raqueteComprimento, raqueteAltura);
 }
 
+//vs cpu
+// function movimentaRaqueteOponente(){
+//   velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
+//   yRaqueteOponente += velocidadeYOponente;
+// }
+
+//vs player
 function movimentaRaqueteOponente(){
-  velocidadeYOponente = yBolinha - yRaqueteOponente - raqueteComprimento/2 - 30;
-  yRaqueteOponente += velocidadeYOponente;
+  if(keyIsDown(UP_ARROW)){
+      yRaqueteOponente -= 7;
+  }
+  if(keyIsDown(DOWN_ARROW)){
+      yRaqueteOponente += 7;
+  }
 }
 
 function movimentaMinhaRaquete(){
-    if(keyIsDown(UP_ARROW)){
+    if(keyIsDown(87)){
         yMinhaRaquete -= 7;
     }
-    if(keyIsDown(DOWN_ARROW)){
+    if(keyIsDown(83)){
         yMinhaRaquete += 7;
     }
 }
@@ -75,6 +97,7 @@ function verificaColisaoRaquetesLib(x, y){
   colidiu = collideRectCircle(x, y, raqueteComprimento, raqueteAltura, xBolinha, yBolinha, raio);
   if(colidiu){
     velocidadeXBolinha *= -1;
+    raquetada.play();
   }
 }
 
@@ -128,11 +151,13 @@ function pontuacao(){
     pontoOponente += 1;
     yBolinha = 200;
     xBolinha = 300;
+    ponto.play();
   }
   if(xBolinha >= 590){
     meuPonto += 1;
     yBolinha = 200;
     xBolinha = 300;
+    ponto.play();
   }
   fimDoJogo();
 }
@@ -157,7 +182,8 @@ function fimDoJogo(){
 
 
 function comecarDeNovo(){
-  text("COMEÇAR DE NOVO?", 217, 300);
+  textSize(10);
+  text("PRESSIONE ENTER PARA COMEÇAR DE NOVO", 190, 300);
   if(keyIsDown(ENTER)){
     meuPonto = 0;
     pontoOponente = 0;
