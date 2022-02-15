@@ -15,15 +15,15 @@ O projeto se trata do jogo Pong, onde as raquetes, localizadas nas bordas esquer
         - ponto.mp3
         - raquetada.mp3
         - trilha.mp3
-    - /js
-        - sketch.js
-        - bolinha.js
-        - raquetes.js
-        - sons.js
-        - pontuacao.js
-        - p5.collide2d.js
-    - /css
-        - style.css
+- /js
+    - sketch.js
+    - bolinha.js
+    - raquetes.js
+    - sons.js
+    - pontuacao.js
+    - p5.collide2d.js
+- /css
+    - style.css
 
 
 ## Layout Sugerido
